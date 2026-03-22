@@ -1,0 +1,47 @@
+
+@model IEnumerable<DanceStudio.Domain.Model.Subscription>
+
+@{
+    ViewData["Title"] = "Абонементи";
+    string[] types = { "Разовий", "Абонемент", "Місячний" };
+}
+
+<h1>Танцювальна студія</h1>
+
+
+<h2>Абонементи</h2>
+
+<p>
+    <a href="/Subscriptions/Create" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 3px;">Додати абонемент</a>
+</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Клієнт</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Тип</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Всього занять</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Залишилось</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Оплата ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Дії</th>
+         </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+         <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Id</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.User?.FullName</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@types[item.Subscriptions_type - 1]</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.TotalLessons</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.RemainingLessons</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Payment_ID</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <a href="/Subscriptions/Edit/@item.Id" style="color: #007bff;">Edit</a> |
+                <a href="/Subscriptions/Details/@item.Id" style="color: #17a2b8;">Details</a> |
+                <a href="/Subscriptions/Delete/@item.Id" style="color: #dc3545;">Delete</a>
+            </td>
+         </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,82 @@
+
+@{
+    ViewData["Title"] = "Головна";
+}
+
+<style>
+    .hero {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        margin-bottom: 40px;
+    }
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+    .hero p {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+    .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    .btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-size: 16px;
+        transition: 0.3s;
+        text-align: center;
+        min-width: 140px;
+    }
+    .btn:hover {
+        background-color: #5a67d8;
+        transform: scale(1.05);
+    }
+    .btn-secondary {
+        background-color: #48bb78;
+    }
+    .btn-secondary:hover {
+        background-color: #38a169;
+    }
+    .btn-accent {
+        background-color: #ed8936;
+    }
+    .btn-accent:hover {
+        background-color: #dd6b20;
+    }
+    .btn-purple {
+        background-color: #9f7aea;
+    }
+    .btn-purple:hover {
+        background-color: #805ad5;
+    }
+</style>
+
+<div class="hero">
+    <h1>Ласкаво просимо!</h1>
+    <p>Танцювальна студія</p>
+</div>
+
+<div class="buttons">
+    <a href="/DanceClasses/Index" class="btn">💃 Стилі танців</a>
+    <a href="/Groups/Index" class="btn btn-secondary">👥 Групи</a>
+    <a href="/Coaches/Index" class="btn">👨‍🏫 Тренери</a>
+    <a href="/Schedules/Index" class="btn btn-secondary">📅 Розклад</a>
+    <a href="/Bookings/Index" class="btn">📝 Записи</a>
+    <a href="/Users/Index" class="btn btn-secondary">👤 Клієнти</a>
+    <a href="/Subscriptions/Index" class="btn btn-accent">🎫 Абонементи</a>
+    <a href="/Payments/Index" class="btn">💰 Оплати</a>
+    <a href="/SubscriptionTypes/Index" class="btn btn-secondary">📋 Типи абонементів</a>
+</div>

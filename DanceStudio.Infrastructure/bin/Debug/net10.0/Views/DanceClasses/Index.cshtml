@@ -1,0 +1,39 @@
+
+@model IEnumerable<DanceStudio.Domain.Model.Style>
+
+@{
+    ViewData["Title"] = "Стилі танців";
+}
+
+<h1>Танцювальна студія</h1>
+
+<h2>Стилі танців</h2>
+
+<p>
+    <a href="/DanceClasses/Create" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 3px;">Create New</a>
+</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Назва</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Кількість груп</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+         <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Id</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Name</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@(item.Groups?.Count ?? 0)</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <a href="/DanceClasses/Edit/@item.Id" style="color: #007bff;">Edit</a> |
+                <a href="/DanceClasses/Details/@item.Id" style="color: #17a2b8;">Details</a> |
+                <a href="/DanceClasses/Delete/@item.Id" style="color: #dc3545;">Delete</a>
+            </td>
+         </tr>
+}
+    </tbody>
+</table>

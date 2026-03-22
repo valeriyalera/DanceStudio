@@ -1,0 +1,12 @@
+/Users/valeriapotehina/src/DanceStudio.Domain/bin/Debug/net8.0/DanceStudio.Domain.deps.json
+/Users/valeriapotehina/src/DanceStudio.Domain/bin/Debug/net8.0/DanceStudio.Domain.dll
+/Users/valeriapotehina/src/DanceStudio.Domain/bin/Debug/net8.0/DanceStudio.Domain.pdb
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.AssemblyInfoInputs.cache
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.AssemblyInfo.cs
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.csproj.CoreCompileInputs.cache
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.sourcelink.json
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.dll
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/refint/DanceStudio.Domain.dll
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.pdb
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/ref/DanceStudio.Domain.dll

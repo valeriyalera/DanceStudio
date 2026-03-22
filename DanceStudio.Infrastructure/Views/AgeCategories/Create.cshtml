@@ -1,0 +1,31 @@
+@model DanceStudio.Domain.Model.AgeCategory
+
+@{
+    ViewData["Title"] = "Додати вікову категорію";
+}
+
+<h1>Додати нову вікову категорію</h1>
+
+<hr />
+
+<form asp-action="Create">
+    <div style="margin-bottom: 15px;">
+        <label asp-for="Title" style="display: block; margin-bottom: 5px;">Назва категорії:</label>
+        <input asp-for="Title" style="width: 300px; padding: 8px;" required />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label asp-for="MinAge" style="display: block; margin-bottom: 5px;">Мінімальний вік:</label>
+        <input asp-for="MinAge" type="number" style="width: 100px; padding: 8px;" />
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label asp-for="MaxAge" style="display: block; margin-bottom: 5px;">Максимальний вік:</label>
+        <input asp-for="MaxAge" type="number" style="width: 100px; padding: 8px;" />
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button type="submit" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Створити</button>
+        <a asp-action="Index" style="margin-left: 15px; color: #007bff; text-decoration: none;">Назад до списку</a>
+    </div>
+</form>

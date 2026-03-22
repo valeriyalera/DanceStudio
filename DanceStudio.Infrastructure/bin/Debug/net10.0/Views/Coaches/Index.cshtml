@@ -1,0 +1,45 @@
+
+@model IEnumerable<DanceStudio.Domain.Model.Coach>
+
+@{
+    ViewData["Title"] = "Тренери";
+}
+
+<h1>Танцювальна студія</h1>
+
+<h2>Тренери</h2>
+
+<p>
+    <a href="/Coaches/Create" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 3px;">Додати тренера</a>
+</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Ім'я</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Прізвище</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Група ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Кількість записів</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Кількість скасувань</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Дії</th>
+         </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+         <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Id</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.FirstName</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.LastName</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Group_ID</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@(item.Bookings?.Count ?? 0)</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@(item.Cancellations?.Count ?? 0)</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <a href="/Coaches/Edit/@item.Id" style="color: #007bff;">Edit</a> |
+                <a href="/Coaches/Details/@item.Id" style="color: #17a2b8;">Details</a> |
+                <a href="/Coaches/Delete/@item.Id" style="color: #dc3545;">Delete</a>
+            </td>
+         </tr>
+}
+    </tbody>
+</table>

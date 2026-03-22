@@ -1,0 +1,18 @@
+
+@model DanceStudio.Domain.Model.Style
+
+@{
+    ViewData["Title"] = "Create New Style";
+}
+
+<h1>Create New Style</h1>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label>Name:</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <button type="submit">Create</button>
+    <a asp-action="Index">Back to List</a>
+</form>

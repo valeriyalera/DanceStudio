@@ -1,0 +1,25 @@
+
+@model DanceStudio.Domain.Model.User
+
+@{
+    ViewData["Title"] = "Додати клієнта";
+}
+
+<h1>Додати клієнта</h1>
+
+<form asp-action="Create">
+    <div>
+        <label>ПІБ:</label>
+        <input asp-for="FullName" />
+    </div>
+    <div>
+        <label>Дата народження:</label>
+        <input asp-for="BirthDate" type="date" />
+    </div>
+    <div>
+        <label>Прізвище:</label>
+        <input asp-for="LastName" />
+    </div>
+    <button type="submit">Створити</button>
+    <a asp-action="Index">Назад</a>
+</form>

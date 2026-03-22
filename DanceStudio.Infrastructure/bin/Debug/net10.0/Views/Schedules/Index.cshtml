@@ -1,0 +1,50 @@
+
+@model IEnumerable<DanceStudio.Domain.Model.Schedule>
+
+@{
+    ViewData["Title"] = "Розклад занять";
+    string[] days = { "Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота", "Неділя" };
+}
+
+<h1>Танцювальна студія</h1>
+
+<h2>Розклад занять</h2>
+
+<p>
+    <a href="/Schedules/Create" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 3px;">Додати розклад</a>
+</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">День</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Час</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Кімната</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Група</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Стиль</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Тренер</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Кількість записів</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Дії</th>
+         </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+         <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Id</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@days[item.DayOfWeek - 1]</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.StartTime</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.RoomNumber</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Group?.Id</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Group?.Style?.Name</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Group?.Coach?.FirstName @item.Group?.Coach?.LastName</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@(item.Bookings?.Count ?? 0)</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <a href="/Schedules/Edit/@item.Id" style="color: #007bff;">Edit</a> |
+                <a href="/Schedules/Details/@item.Id" style="color: #17a2b8;">Details</a> |
+                <a href="/Schedules/Delete/@item.Id" style="color: #dc3545;">Delete</a>
+            </td>
+         </tr>
+}
+    </tbody>
+</table>

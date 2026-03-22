@@ -1,0 +1,40 @@
+
+@model IEnumerable<DanceStudio.Domain.Model.Cancellation>
+
+@{
+    ViewData["Title"] = "Скасування";
+    string[] reasons = { "Хвороба", "Особисті обставини", "Технічні причини", "Відпустка", "Інше" };
+}
+
+<h1>Скасування занять</h1>
+
+<p>
+    <a href="/Cancellations/Create" style="display: inline-block; padding: 5px 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 3px;">Додати скасування</a>
+</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Тренер ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Розклад ID</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Причина</th>
+            <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Id</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Coach_ID</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@item.Schedule_ID</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">@reasons[item.Reason - 1]</td>
+            <td style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <a href="/Cancellations/Edit/@item.Id">Edit</a> |
+                <a href="/Cancellations/Details/@item.Id">Details</a> |
+                <a href="/Cancellations/Delete/@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

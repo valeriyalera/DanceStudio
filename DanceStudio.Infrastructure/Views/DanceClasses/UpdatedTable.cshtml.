@@ -1,0 +1,25 @@
+@model IEnumerable<DanceStudio.Domain.Model.Style>
+
+<h1>Оновлена таблиця стилів</h1>
+<p style="color: green; font-weight: bold;">Зміни успішно збережено!</p>
+
+<table class="table" style="width: 100%; border: 1px solid black;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Назва</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>
+                <a asp-action="Index">Повернутися до загального списку</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

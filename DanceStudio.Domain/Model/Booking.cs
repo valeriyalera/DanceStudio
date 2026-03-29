@@ -10,7 +10,7 @@ public partial class Booking
 
     public int Schedule_ID { get; set; }
 
-    public string Status { get; set; } = string.Empty; // 0-заплановано, 1-підтверджено, 2-скасовано, 3-відвідано
+    public string Status { get; set; } = string.Empty; 
 
     public int Coach_ID { get; set; }
 

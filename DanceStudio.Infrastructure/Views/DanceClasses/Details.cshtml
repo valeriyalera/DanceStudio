@@ -1,0 +1,25 @@
+@model DanceStudio.Domain.Model.Style
+
+@{ ViewData["Title"] = "Деталі стилю"; }
+
+<h1>Деталі стилю: @Model.Name</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Назва</dt>
+        <dd class="col-sm-10">@Model.Name</dd>
+    </dl>
+</div>
+
+<h4>Групи цього стилю</h4>
+<ul>
+    @foreach (var group in Model.Groups) {
+        <li>Група №@group.Id (Тренер: @group.Coach?.FirstName @group.Coach?.LastName)</li>
+    }
+</ul>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

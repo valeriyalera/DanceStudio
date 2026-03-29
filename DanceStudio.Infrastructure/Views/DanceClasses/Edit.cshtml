@@ -1,0 +1,12 @@
+@model DanceStudio.Domain.Model.Style
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label>Змінити назву:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Зберегти та оновити таблицю</button>
+</form>

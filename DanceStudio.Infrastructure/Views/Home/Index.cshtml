@@ -1,82 +1,705 @@
-
 @{
     ViewData["Title"] = "Головна";
 }
 
 <style>
-    .hero {
-        text-align: center;
-        padding: 60px 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border-radius: 15px;
-        margin-bottom: 40px;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
-    .hero h1 {
-        font-size: 48px;
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #000000;
+        color: #fff;
+        min-height: 100vh;
+    }
+
+    /* Плавний скролінг */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Navigation */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.8);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+    }
+
+    .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .logo span {
+        color: #3b82f6;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #ccc;
+    }
+
+    /* Загальні стилі для секцій */
+    section {
+        scroll-margin-top: 80px;
+    }
+
+    /* Courses section */
+    .courses-section {
+        padding: 120px 50px 80px;
+        background: #000000;
+    }
+
+    .three-columns {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .column {
+        flex: 1;
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .left-column {
+        text-align: left;
+    }
+
+    .right-column {
+        text-align: right;
+        align-items: flex-end;
+    }
+
+    .column-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #ddd;;
+    }
+
+    .left-column p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #ddd;
+        margin: 0;
+    }
+
+    .column-image {
+        text-align: center;
+    }
+
+    .column-image img {
+        width: 100%;
+        max-width: 350px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        object-fit: cover;
         margin-bottom: 20px;
     }
-    .hero p {
-        font-size: 20px;
-        margin-bottom: 30px;
+
+    .studio-name {
+        font-size: 50px;
+        font-weight: bold;
+        margin: 35px 0 30px;
+        color: #3b82f6;
+        font-family: 'Poppins', 'Segoe UI', sans-serif;
     }
-    .buttons {
+
+    .btn-under-photo {
+        display: inline-block;
+        padding: 12px 30px;
+        background: transparent;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: transform 0.3s, background 0.3s, border-color 0.3s;
+        margin-top: 30px;
+        border: 2px solid #fff;
+    }
+
+    .btn-under-photo:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: scale(1.02);
+        border-color: #ccc;
+    }
+
+    .achievements-list {
+        text-align: right;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .achievements-list li {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #ddd;
+        position: relative;
+        padding-right: 28px;
+        display: block;
+    }
+
+    .achievements-list li::before {
+        content: "✓";
+        color: #fff;
+        position: absolute;
+        right: 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .right-column {
+            text-align: left;
+            align-items: flex-start;
+        }
+        .achievements-list li {
+            padding-right: 0;
+            padding-left: 28px;
+        }
+        .achievements-list li::before {
+            right: auto;
+            left: 0;
+        }
+    }
+
+    /* Стилі для додаткових секцій */
+    .info-section {
+        padding: 80px 50px;
+        text-align: center;
+        background: #000000;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .info-section h2 {
+        font-size: 36px;
+        margin-bottom: 40px;
+        color: #3b82f6;
+    }
+
+    /* About Us Section Styles */
+    .about-content {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .about-text {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #ddd;
+        margin-bottom: 40px;
+    }
+
+    .discount-badge {
+        display: inline-block;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50px;
+        padding: 12px 30px;
+        margin-bottom: 40px;
+        font-size: 16px;
+    }
+
+    .discount-badge strong {
+        color: #3b82f6;
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .stats-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+        margin: 50px 0;
+    }
+
+    .stat-card {
+        flex: 1;
+        min-width: 200px;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 20px;
+        background: transparent;
+    }
+
+    .stat-number {
+        font-size: 48px;
+        font-weight: bold;
+        color: #3b82f6;
+        margin-bottom: 10px;
+    }
+
+    .stat-label {
+        font-size: 14px;
+        color: #aaa;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .countries-grid {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 15px;
-        max-width: 1000px;
+        margin-top: 40px;
+    }
+
+    .country-badge {
+        padding: 8px 20px;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 30px;
+        font-size: 14px;
+        color: #ddd;
+    }
+
+    /* FAQ Grid Styles */
+    .faq-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        max-width: 1200px;
         margin: 0 auto;
     }
-    .btn {
-        display: inline-block;
-        padding: 12px 25px;
-        background-color: #667eea;
-        color: white;
-        text-decoration: none;
-        border-radius: 30px;
-        font-size: 16px;
-        transition: 0.3s;
-        text-align: center;
-        min-width: 140px;
+
+    .faq-column {
+        flex: 1;
+        min-width: 280px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
     }
-    .btn:hover {
-        background-color: #5a67d8;
+
+    .faq-item {
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 12px;
+        background: transparent;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        color: #fff;
+        gap: 15px;
+    }
+
+    .faq-question span {
+        flex: 1;
+        text-align: left;
+    }
+
+    .faq-toggle {
+        background: transparent;
+        border: 1.5px solid #fff;
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .faq-toggle:hover {
+        background: rgba(255,255,255,0.2);
         transform: scale(1.05);
     }
-    .btn-secondary {
-        background-color: #48bb78;
+
+    .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        padding: 0 20px;
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 14px;
     }
-    .btn-secondary:hover {
-        background-color: #38a169;
+
+    .faq-item.active .faq-answer {
+        max-height: 200px;
+        padding: 0 20px 20px 20px;
     }
-    .btn-accent {
-        background-color: #ed8936;
+
+    .faq-item.active .faq-toggle {
+        transform: rotate(45deg);
     }
-    .btn-accent:hover {
-        background-color: #dd6b20;
+
+    /* Contacts Section Styles */
+    .contacts-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        max-width: 1100px;
+        margin: 0 auto;
     }
-    .btn-purple {
-        background-color: #9f7aea;
+
+    .contact-card {
+        flex: 1;
+        min-width: 250px;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 25px;
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 20px;
+        background: transparent;
+        transition: all 0.3s ease;
     }
-    .btn-purple:hover {
-        background-color: #805ad5;
+
+    .contact-card:hover {
+        border-color: rgba(255,255,255,0.5);
+        transform: translateY(-3px);
+    }
+
+    .contact-icon {
+        font-size: 40px;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        background: transparent;
+    }
+
+    .contact-info {
+        flex: 1;
+        text-align: left;
+    }
+
+    .contact-title {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #aaa;
+        margin-bottom: 8px;
+    }
+
+    .contact-value {
+        font-size: 18px;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .contact-value:hover {
+        color: #3b82f6;
+    }
+
+    .contact-note {
+        font-size: 13px;
+        color: #888;
+        line-height: 1.4;
+    }
+
+    /* School Section (moved to bottom, no title) */
+    .school-bottom {
+        padding: 80px 50px;
+        text-align: center;
+        background: #000000;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .school-bottom p {
+        color: #ddd;
+        max-width: 600px;
+        margin: 0 auto 30px;
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .btn-start {
+        display: inline-block;
+        padding: 15px 40px;
+        background: #fff;
+        color: #000;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        transition: transform 0.3s, background 0.3s;
+    }
+
+    .btn-start:hover {
+        background: #ccc;
+        transform: scale(1.05);
+    }
+
+    /* Footer */
+    .footer {
+        padding: 40px 50px;
+        text-align: center;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        color: #aaa;
+        background: #000000;
     }
 </style>
 
-<div class="hero">
-    <h1>Ласкаво просимо!</h1>
-    <p>Танцювальна студія</p>
+<!-- Navigation -->
+<div class="navbar">
+    <div class="logo">Dance<span>Studio</span></div>
+    <div class="nav-links">
+        <a href="#about">About us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Contacts</a>
+        <a href="/DanceClasses" style="color: #3b82f6;">Courses</a>
+        <a href="/Coaches" style="color: #3b82f6;">Our trainers</a>
+    </div>
 </div>
 
-<div class="buttons">
-    <a href="/DanceClasses/Index" class="btn">💃 Стилі танців</a>
-    <a href="/Groups/Index" class="btn btn-secondary">👥 Групи</a>
-    <a href="/Coaches/Index" class="btn">👨‍🏫 Тренери</a>
-    <a href="/Schedules/Index" class="btn btn-secondary">📅 Розклад</a>
-    <a href="/Bookings/Index" class="btn">📝 Записи</a>
-    <a href="/Users/Index" class="btn btn-secondary">👤 Клієнти</a>
-    <a href="/Subscriptions/Index" class="btn btn-accent">🎫 Абонементи</a>
-    <a href="/Payments/Index" class="btn">💰 Оплати</a>
-    <a href="/SubscriptionTypes/Index" class="btn btn-secondary">📋 Типи абонементів</a>
+<!-- Main courses section -->
+<section class="courses-section">
+    <div class="three-columns">
+        <div class="column left-column">
+            <div class="column-title">Our courses</div>
+            <p>Master a specific style of dance in a short intensive. Fast results and a clear structure, ideal for those who want to steadily grow and dive deep into dance.</p>
+        </div>
+
+        <div class="column column-image">
+            <img src="/images/2026-03-28 23.11.19.jpg" alt="Dancer" onerror="this.src='https://images.pexels.com/photos/472973/pexels-photo-472973.jpeg?auto=compress&cs=tinysrgb&w=600'">
+            <div class="studio-name">Dance Studio</div>
+            <a href="/DanceClasses" class="btn-under-photo">Start training →</a>
+        </div>
+
+        <div class="column right-column">
+            <div class="column-title">Our achievements</div>
+            <ul class="achievements-list">
+                <li>20+ professional coaches</li>
+                <li>10+ years of excellence</li>
+                <li>500+ active students</li>
+                <li>30+ dance styles</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- About us section -->
+<section id="about" class="info-section">
+    <h2>About us</h2>
+    <div class="about-content">
+        <p class="about-text">Dance School is a modern dance school with courses in popular styles: contemporary, hip-hop, modern jazz. We strive to make dance education accessible to everyone, regardless of level.</p>
+        
+        <div class="discount-badge">
+            <strong>15%</strong> Discount on your first course
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">STUDY IN ANY TIME ZONE</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">STUDENTS TRAINED</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">13</div>
+                <div class="stat-label">COUNTRIES</div>
+            </div>
+        </div>
+        
+        <p class="about-text">Each student receives an individual approach and support at every stage! An international team of experts with experience in different dance styles. Teachers from 13 countries.</p>
+        
+        <div class="countries-grid">
+            <span class="country-badge">USA</span>
+            <span class="country-badge">Ukraine</span>
+            <span class="country-badge">UK</span>
+            <span class="country-badge">France</span>
+            <span class="country-badge">Spain</span>
+            <span class="country-badge">Italy</span>
+            <span class="country-badge">Germany</span>
+            <span class="country-badge">Poland</span>
+            <span class="country-badge">Canada</span>
+            <span class="country-badge">Brazil</span>
+            <span class="country-badge">Japan</span>
+            <span class="country-badge">Australia</span>
+            <span class="country-badge">South Korea</span>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section id="faq" class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-grid">
+        <div class="faq-column">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is it possible to get advice before purchasing?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Yes! You can book a free consultation call with our manager. Contact us via email or phone, and we’ll be happy to help you choose the right course.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do I pay for a subscription?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">We accept payment by card online, bank transfer, or cash at the studio. After payment, you'll receive access to your account within 24 hours.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How does the online school work?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">All classes are held via Zoom or our interactive platform. You'll have access to recorded lessons, live feedback from instructors, and homework assignments.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is a trial lesson available?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Yes, you can attend one trial class for free in any direction. Just let us know in advance to book your spot.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Can I choose one direction or study several at once?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Absolutely! You can pick a single style or mix several. Our subscriptions allow you to attend any classes within the selected plan.</div>
+            </div>
+        </div>
+        <div class="faq-column">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is a certificate issued?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Yes, after completing a full course you will receive a certificate of completion indicating the style and level.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How do live classes work?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Live classes take place in our studios according to the schedule. You can book a spot through your personal account.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is it possible to freeze access if you can’t study?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Yes, we offer a freeze option for up to 30 days per subscription period. Just notify us at least 3 days in advance.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is there support from teachers?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Absolutely! Our teachers provide feedback in class, and you can also reach them via chat or email during working hours.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is there a refund?</span>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-answer">Yes, we offer a full refund if you cancel within 14 days of purchase, provided no more than one class has been attended.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contacts Section -->
+<section id="contacts" class="info-section">
+    <h2>Contacts</h2>
+    <div class="contacts-grid">
+        <div class="contact-card">
+            <div class="contact-icon">📞</div>
+            <div class="contact-info">
+                <div class="contact-title">Phone</div>
+                <a href="tel:+380441234567" class="contact-value">+38 (095) 123-45-67</a>
+                <div class="contact-note">Working hours: Mon-Sun, 9:00 - 18:00</div>
+            </div>
+        </div>
+        <div class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-info">
+                <div class="contact-title">Email</div>
+                <a href="mailto:info@dancestudio.com" class="contact-value">info@dancestudio.com</a>
+                <div class="contact-note">We will reply to you within 8 hours.</div>
+            </div>
+        </div>
+        <div class="contact-card">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info">
+                <div class="contact-title">Address</div>
+                <div class="contact-value">10 Dance Street, Kyiv, Ukraine</div>
+                <div class="contact-note">Visit our studio</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- School Section (moved to bottom, no title) -->
+<section class="school-bottom">
+    <p>We provide professional dance education for all ages and levels. Our experienced trainers will help you discover your potential and achieve your goals.</p>
+    <a href="/Groups" class="btn-start">Explore groups →</a>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+    <p>© 2026 Dance Studio. All rights reserved.</p>
 </div>
+
+<script>
+    document.querySelectorAll('.faq-item').forEach(item => {
+        const toggle = item.querySelector('.faq-toggle');
+        const question = item.querySelector('.faq-question');
+        
+        function toggleItem() {
+            item.classList.toggle('active');
+        }
+        
+        toggle.addEventListener('click', toggleItem);
+        question.addEventListener('click', (e) => {
+            if (e.target !== toggle) toggleItem();
+        });
+    });
+</script>

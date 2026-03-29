@@ -138,3 +138,7 @@
 /Users/valeriapotehina/src/DanceStudio.Infrastructure/obj/Debug/net10.0/DanceStudio.Infrastructure.genruntimeconfig.cache
 /Users/valeriapotehina/src/DanceStudio.Infrastructure/obj/Debug/net10.0/ref/DanceStudio.Infrastructure.dll
 /Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/AgeCategories/Create.cshtml
+/Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/DanceStudio.Infrastructure.staticwebassets.runtime.json
+/Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/DanceClasses/Delete.cshtml
+/Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/DanceClasses/Details.cshtml
+/Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/DanceClasses/Edit.cshtml

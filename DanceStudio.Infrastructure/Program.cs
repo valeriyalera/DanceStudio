@@ -2,6 +2,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using DanceStudio.Infrastructure;
+using DanceStudio.Domain.Model;
+using DanceStudio.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ builder.Services.AddDbContext<DanceStudioContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("AppConnection")));
 
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<IDataPortServiceFactory<Group>, GroupDataPortServiceFactory>();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -29,10 +31,11 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
+
 if (app.Environment.IsDevelopment())
 {
-    var url = "http://localhost:5075"; 
-    
+    var url = "http://localhost:5075";
+
     Task.Delay(1000).ContinueWith(_ =>
     {
         try

@@ -142,3 +142,4 @@
 /Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/DanceClasses/Delete.cshtml
 /Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/DanceClasses/Details.cshtml
 /Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/DanceClasses/Edit.cshtml
+/Users/valeriapotehina/src/DanceStudio.Infrastructure/bin/Debug/net10.0/Views/Groups/Create.cshtml

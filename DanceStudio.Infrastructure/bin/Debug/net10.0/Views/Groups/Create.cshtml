@@ -1,0 +1,44 @@
+@model DanceStudio.Domain.Model.Group
+
+@{
+    ViewData["Title"] = "Створити групу";
+}
+
+<h1>Створити групу</h1>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="Style_ID">Стиль танцю</label>
+        <select asp-for="Style_ID" class="form-control" asp-items="ViewBag.Styles as SelectList">
+            <option value="">-- Оберіть стиль --</option>
+        </select>
+        <span asp-validation-for="Style_ID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AgeCategories_ID">Вікова категорія</label>
+        <select asp-for="AgeCategories_ID" class="form-control" asp-items="ViewBag.AgeCategories as SelectList">
+            <option value="">-- Оберіть вікову категорію --</option>
+        </select>
+        <span asp-validation-for="AgeCategories_ID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Level">Рівень</label>
+        <select asp-for="Level" class="form-control" asp-items="ViewBag.Levels as SelectList">
+            <option value="">-- Оберіть рівень --</option>
+        </select>
+        <span asp-validation-for="Level" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Coach_ID">Тренер</label>
+        <select asp-for="Coach_ID" class="form-control" asp-items="ViewBag.Coaches as SelectList">
+            <option value="">-- Оберіть тренера --</option>
+        </select>
+        <span asp-validation-for="Coach_ID" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Створити</button>
+    <a asp-action="Index" class="btn btn-secondary">Назад</a>
+</form>

@@ -6,7 +6,7 @@ namespace DanceStudio.Domain.Model;
 
 public partial class Style
 {
-    [Key]
+    
     public int Id { get; set; }
 
     public string? Name { get; set; }

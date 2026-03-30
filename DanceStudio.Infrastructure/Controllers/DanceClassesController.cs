@@ -140,7 +140,6 @@
 //     }
 // }
 
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DanceStudio.Domain.Model;
@@ -160,15 +159,9 @@ public class DanceClassesController : Controller
     // GET: DanceClasses
     public async Task<IActionResult> Index()
     {
-        var styles = await _context.Styles.ToListAsync();
-
-        // Тимчасовий "хак" для демонстрації:
-        // Якщо хочеш, щоб перший стиль завжди називався по-новому:
-        if (styles.Count > 0)
-        {
-            styles[0].Name = "Нова назва (тест)";
-        }
-
+        var styles = await _context.Styles
+            .Include(s => s.Groups) // підтягуємо групи для підрахунку
+            .ToListAsync();
         return View(styles);
     }
 
@@ -183,7 +176,7 @@ public class DanceClassesController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Style style)
     {
-        ModelState.Remove("Groups");
+        ModelState.Remove("Groups"); // групи додаються окремо, тому не перевіряємо
 
         if (!ModelState.IsValid)
             return View(style);
@@ -203,31 +196,34 @@ public class DanceClassesController : Controller
 
         return View(style);
     }
-// Це адреса нової сторінки: /DanceClasses/UpdatedTable
-public async Task<IActionResult> UpdatedTable()
-{
-    var styles = await _context.Styles.ToListAsync();
-    return View(styles); // Вона покаже актуальні дані з бази
-}
+
+    // POST: DanceClasses/Edit/5
     [HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Edit(int id, Style style)
-{
-    if (id != style.Id) return NotFound();
-
-    try 
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Style style)
     {
-        _context.Update(style);
-        await _context.SaveChangesAsync();
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Помилка збереження: " + ex.Message);
+        if (id != style.Id)
+            return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(style);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!StyleExists(style.Id))
+                    return NotFound();
+                else
+                    throw;
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        return View(style);
     }
 
-    // ОСЬ ТУТ: замість Index пишемо UpdatedTable
-    return RedirectToAction(nameof(UpdatedTable));
-}
     // GET: DanceClasses/Details/5
     public async Task<IActionResult> Details(int id)
     {
@@ -262,17 +258,16 @@ public async Task<IActionResult> Edit(int id, Style style)
     public async Task<IActionResult> DeleteConfirmed(int id)
     {
         var style = await _context.Styles.FindAsync(id);
-
         if (style != null)
         {
             _context.Styles.Remove(style);
             await _context.SaveChangesAsync();
         }
-
         return RedirectToAction(nameof(Index));
     }
+
     private bool StyleExists(int id)
-{
-    return _context.Styles.Any(e => e.Id == id);
-}
+    {
+        return _context.Styles.Any(e => e.Id == id);
+    }
 }

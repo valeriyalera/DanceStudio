@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DanceStudio.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4e58cd5cd2bdb6fcd6d0c353a58d3df610591ced")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d00b1c86edcaf437b2b0def73e1b9afed222e983")]
 [assembly: System.Reflection.AssemblyProductAttribute("DanceStudio.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DanceStudio.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

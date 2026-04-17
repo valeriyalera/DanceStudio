@@ -1,12 +1,12 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DanceStudio.Domain.Model;
 using DanceStudio.Infrastructure;
-using DanceStudio.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DanceStudio.Infrastructure.Controllers;
 
+[Authorize(Roles = "Admin,Coach")]
 public class GroupsController : Controller
 {
     private readonly DanceStudioContext _context;
@@ -16,74 +16,132 @@ public class GroupsController : Controller
         _context = context;
     }
 
+    // GET: Groups
     public async Task<IActionResult> Index()
     {
         var groups = await _context.Groups
             .Include(g => g.Style)
             .Include(g => g.AgeCategory)
-            .Include(g => g.Coach)  // ← підтягуємо тренера
+            .Include(g => g.Coach)
             .ToListAsync();
 
         return View(groups);
     }
 
+    // GET: Groups/Create
     public IActionResult Create()
     {
         return View();
     }
 
+    // POST: Groups/Create
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Group group)
     {
-        _context.Groups.Add(group);
-        await _context.SaveChangesAsync();
+        if (ModelState.IsValid)
+        {
+            _context.Groups.Add(group);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        return View(group);
+    }
+
+    // GET: Groups/Edit/5
+    public async Task<IActionResult> Edit(int id)
+    {
+        var group = await _context.Groups.FindAsync(id);
+        if (group == null)
+        {
+            return NotFound();
+        }
+        return View(group);
+    }
+
+    // POST: Groups/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, Group group)
+    {
+        if (id != group.Id)
+        {
+            return NotFound();
+        }
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                _context.Update(group);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!GroupExists(group.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+        }
+        return View(group);
+    }
+
+    // GET: Groups/Details/5
+    public async Task<IActionResult> Details(int id)
+    {
+        var group = await _context.Groups
+            .Include(g => g.Style)
+            .Include(g => g.AgeCategory)
+            .Include(g => g.Coach)
+            .FirstOrDefaultAsync(g => g.Id == id);
+
+        if (group == null)
+        {
+            return NotFound();
+        }
+
+        return View(group);
+    }
+
+    // GET: Groups/Delete/5
+    public async Task<IActionResult> Delete(int id)
+    {
+        var group = await _context.Groups
+            .Include(g => g.Style)
+            .Include(g => g.AgeCategory)
+            .Include(g => g.Coach)
+            .FirstOrDefaultAsync(g => g.Id == id);
+
+        if (group == null)
+        {
+            return NotFound();
+        }
+
+        return View(group);
+    }
+
+    // POST: Groups/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var group = await _context.Groups.FindAsync(id);
+        if (group != null)
+        {
+            _context.Groups.Remove(group);
+            await _context.SaveChangesAsync();
+        }
         return RedirectToAction(nameof(Index));
     }
-    private readonly IDataPortServiceFactory<Group> _dataPortServiceFactory;
 
-    public GroupsController(DanceStudioContext context, IDataPortServiceFactory<Group> dataPortServiceFactory)
+    private bool GroupExists(int id)
     {
-        _context = context;
-        _dataPortServiceFactory = dataPortServiceFactory;
+        return _context.Groups.Any(e => e.Id == id);
     }
-
-// GET: Groups/Import
-public IActionResult Import()
-{
-    return View();
 }
-
-// POST: Groups/Import
-[HttpPost]
-[ValidateAntiForgeryToken]
-public async Task<IActionResult> Import(IFormFile fileExcel, CancellationToken cancellationToken)
-{
-    if (fileExcel == null || fileExcel.Length == 0)
-    {
-        ModelState.AddModelError("", "Будь ласка, оберіть файл Excel.");
-        return View();
-    }
-
-    var importService = _dataPortServiceFactory.GetImportService(fileExcel.ContentType);
-
-    using var stream = fileExcel.OpenReadStream();
-    await importService.ImportFromStreamAsync(stream, cancellationToken);
-
-    return RedirectToAction(nameof(Index));
-}
-
-// GET: Groups/Export
-public async Task<IActionResult> Export(CancellationToken cancellationToken)
-{
-    const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    var exportService = _dataPortServiceFactory.GetExportService(contentType);
-
-    using var stream = new MemoryStream();
-    await exportService.WriteToAsync(stream, cancellationToken);
-
-    stream.Position = 0;
-    return File(stream, contentType, $"groups_{DateTime.UtcNow:yyyyMMdd_HHmmss}.xlsx");
-}
-
-}
-

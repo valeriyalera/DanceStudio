@@ -1,0 +1,12 @@
+
+@model DanceStudio.Infrastructure.ViewModels.RegisterViewModel
+
+<h2>Реєстрація</h2>
+<form method="post">
+    <input asp-for="Email" placeholder="Email" />
+    <input asp-for="FirstName" placeholder="Ім'я" />
+    <input asp-for="LastName" placeholder="Прізвище" />
+    <input asp-for="Password" type="password" placeholder="Пароль" />
+    <input asp-for="PasswordConfirm" type="password" placeholder="Підтвердження" />
+    <button type="submit">Зареєструватися</button>
+</form>

@@ -1,0 +1,44 @@
+
+@model DanceStudio.Infrastructure.ViewModels.LoginViewModel
+
+<style>
+    .login-form {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background: #f9f9f9;
+    }
+    .login-form input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .login-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .login-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="login-form">
+    <h2 style="text-align: center;">Вхід</h2>
+    <form method="post">
+        <input asp-for="Email" placeholder="Email" />
+        <input asp-for="Password" type="password" placeholder="Пароль" />
+        <label>
+            <input asp-for="RememberMe" type="checkbox" /> Запам'ятати мене
+        </label>
+        <button type="submit">Увійти</button>
+    </form>
+</div>

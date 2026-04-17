@@ -1,0 +1,14 @@
+<div class="auth-links">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <span>@User.Identity.Name</span>
+        <form asp-controller="Account" asp-action="Logout" method="post">
+            <button type="submit">Вийти</button>
+        </form>
+    }
+    else
+    {
+        <a asp-controller="Account" asp-action="Login">Вхід</a>
+        <a asp-controller="Account" asp-action="Register">Реєстрація</a>
+    }
+</div>

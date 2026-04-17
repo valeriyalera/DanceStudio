@@ -1,8 +1,7 @@
-using DanceStudio.Domain.Model;
 
 namespace DanceStudio.Infrastructure.Services;
 
 public interface IImportService<TEntity> where TEntity : class
 {
     Task ImportFromStreamAsync(Stream stream, CancellationToken cancellationToken);
-} 
+}

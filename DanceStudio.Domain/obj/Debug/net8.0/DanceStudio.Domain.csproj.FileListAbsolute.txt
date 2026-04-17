@@ -10,3 +10,4 @@
 /Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/refint/DanceStudio.Domain.dll
 /Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.pdb
 /Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/ref/DanceStudio.Domain.dll
+/Users/valeriapotehina/src/DanceStudio.Domain/obj/Debug/net8.0/DanceStudio.Domain.csproj.AssemblyReference.cache

@@ -1,4 +1,3 @@
-using DanceStudio.Domain.Model;
 
 namespace DanceStudio.Infrastructure.Services;
 

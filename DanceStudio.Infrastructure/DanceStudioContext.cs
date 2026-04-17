@@ -133,12 +133,16 @@ modelBuilder.Entity<Schedule>(entity =>
 });
 
         // Style
-        modelBuilder.Entity<Style>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("Styles_pkey");
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.Name).HasColumnName("Name");
-        });
+       modelBuilder.Entity<Style>(entity =>
+{
+    entity.HasKey(e => e.Id).HasName("Styles_pkey");
+    entity.Property(e => e.Id)
+        .HasColumnName("ID")
+        .HasColumnType("integer");
+    entity.Property(e => e.Name)
+        .HasColumnName("Name")
+        .HasColumnType("character varying");
+});
 
         // Subscription
         modelBuilder.Entity<Subscription>(entity =>
